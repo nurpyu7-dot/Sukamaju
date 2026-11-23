@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desa Sukamaju — Pesona Alam, Kearifan Lokal & Budaya Lereng Pegunungan</title>
+
+  <!-- Memuat Tailwind CSS untuk tata letak dan utilitas responsif -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Memuat Google Fonts: Plus Jakarta Sans & Lora untuk nuansa hangat, modern, dan editorial -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Konfigurasi tema warna bernuansa alam: hijau hutan, krem pasir hangat, cokelat kayu, emas & terakota -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            hutan: {
+              950: '#0F241A',
+              900: '#183627',
+              800: '#1F4733',
+              700: '#2A5E44',
+              600: '#387857',
+              100: '#E5EFE9',
+              50: '#F4F8F6'
+            },
+            pasir: {
+              50: '#FCF9F2',
+              100: '#F6F0E4',
+              200: '#EBE0CC',
+              300: '#D8C7AB'
+            },
+            kayu: {
+              900: '#2E1F14',
+              800: '#4A3322',
+              700: '#6B4B33',
+              600: '#8A6345'
+            },
+            terakota: {
+              600: '#C85A32',
+              500: '#D96B43',
+              100: '#FBEAE3'
+            },
+            emas: {
+              500: '#D49B27',
+              400: '#E5B242',
+              100: '#FDF5E2'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            serif: ['"Lora"', 'Georgia', 'serif']
+          },
+          boxShadow: {
+            'lembut': '0 10px 30px -10px rgba(24, 54, 39, 0.08)',
+            'angkat': '0 20px 40px -15px rgba(46, 31, 20, 0.14)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Animasi halus untuk munculnya elemen saat masuk layar */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Efek zoom halus pada gambar kartu */
+    .img-zoom {
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .group:hover .img-zoom {
+      transform: scale(1.06);
+    }
+
+    /* Pola dekoratif halus bernuansa tenun/batik geometris */
+    .pattern-batik {
+      background-image: radial-gradient(rgba(212, 155, 39, 0.14) 1.25px, transparent 1.25px),
+                        radial-gradient(rgba(200, 90, 50, 0.10) 1.25px, #FCF9F2 1.25px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+
+    /* Modal animasi masuk */
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.96) translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-animate {
+      animation: modalFadeIn 0.25s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-pasir-50 text-kayu-900 font-sans antialiased selection:bg-terakota-500 selection:text-white overflow-x-hidden">
+
+  <!-- ==================== 1. NAVIGASI ATAS RESPONSIF ==================== -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-40 transition-all duration-300 bg-pasir-50/90 backdrop-blur-md border-b border-pasir-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <!-- Logo & Nama Desa -->
+        <a href="#beranda" class="flex items-center gap-3 group focus:outline-none">
+          <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-hutan-800 text-emas-400 flex items-center justify-center shadow-sm group-hover:bg-hutan-700 transition-colors">
+            <!-- Ikon Gunung & Daun SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 21l4-10 4 10" />
+              <path d="M2 21l6-14 3.5 7" />
+              <path d="M14.5 14L18 7l4 14" />
+              <path d="M2 21h20" />
+            </svg>
+          </div>
+          <div>
+            <span class="block font-serif font-bold text-lg sm:text-xl text-hutan-900 leading-tight">Desa Sukamaju</span>
+            <span class="block text-[11px] uppercase tracking-widest text-kayu-600 font-medium">Lereng Hijau Pegunungan</span>
+          </div>
+        </a>
+
+        <!-- Menu Navigasi Desktop -->
+        <nav class="hidden lg:flex items-center gap-7 text-sm font-medium text-kayu-800" aria-label="Navigasi Utama">
+          <a href="#profil" class="hover:text-terakota-600 transition-colors py-2">Profil Desa</a>
+          <a href="#wisata" class="hover:text-terakota-600 transition-colors py-2">Wisata &amp; Budaya</a>
+          <a href="#produk" class="hover:text-terakota-600 transition-colors py-2">Produk Lokal</a>
+          <a href="#galeri" class="hover:text-terakota-600 transition-colors py-2">Galeri</a>
+          <a href="#kontak" class="hover:text-terakota-600 transition-colors py-2">Kontak</a>
+        </nav>
+
+        <!-- Tombol CTA Desktop & Tombol Menu Mobile -->
+        <div class="flex items-center gap-3">
+          <a href="#kontak" class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-terakota-600 hover:bg-terakota-500 text-white text-sm font-semibold shadow-sm transition-all hover:-translate-y-0.5">
+            <span>Kunjungi Kami</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+
+          <button id="mobile-menu-btn" type="button" aria-label="Buka atau tutup menu navigasi" aria-expanded="false" class="lg:hidden p-2.5 rounded-xl bg-pasir-100 hover:bg-pasir-200 text-hutan-900 transition-colors">
+            <svg id="menu-icon-open" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg id="menu-icon-close" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel Menu Mobile -->
+    <div id="mobile-menu" class="lg:hidden hidden bg-pasir-50 border-b border-pasir-200 shadow-lg">
+      <div class="px-4 pt-2 pb-5 space-y-1.5">
+        <a href="#profil" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-kayu-800 hover:bg-pasir-100 hover:text-hutan-800">Profil Desa</a>
+        <a href="#wisata" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-kayu-800 hover:bg-pasir-100 hover:text-hutan-800">Wisata &amp; Budaya</a>
+        <a href="#produk" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-kayu-800 hover:bg-pasir-100 hover:text-hutan-800">Produk Lokal</a>
+        <a href="#galeri" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-kayu-800 hover:bg-pasir-100 hover:text-hutan-800">Galeri</a>
+        <a href="#kontak" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-kayu-800 hover:bg-pasir-100 hover:text-hutan-800">Kontak</a>
+        <div class="pt-2">
+          <a href="#kontak" class="mobile-nav-link block w-full text-center px-4 py-3 rounded-xl bg-terakota-600 hover:bg-terakota-500 text-white font-semibold">
+            Rencanakan Kunjungan
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==================== 2. HERO SECTION ==================== -->
+    <section id="beranda" class="relative pt-24 sm:pt-32 pb-16 sm:pb-24 overflow-hidden">
+      <!-- Latar belakang gradasi hangat & aksen organik -->
+      <div class="absolute inset-0 -z-10 bg-gradient-to-b from-hutan-100/70 via-pasir-50 to-pasir-50"></div>
+      <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-emas-400/15 blur-3xl -z-10"></div>
+      <div class="absolute top-1/3 -left-24 w-80 h-80 rounded-full bg-hutan-600/10 blur-3xl -z-10"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <!-- Kolom Teks Hero -->
+          <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-hutan-100 border border-hutan-600/20 text-hutan-800 text-xs sm:text-sm font-semibold">
+              <span class="w-2 h-2 rounded-full bg-terakota-500 animate-pulse"></span>
+              <span>Desa Wisata &amp; Budaya • 1.150 MDPL</span>
+            </div>
+
+            <h1 class="font-serif text-4xl sm:text-5xl lg:text-[3.35rem] font-bold text-hutan-950 leading-[1.15] tracking-tight">
+              Menyapa Pagi di <span class="text-terakota-600">Lereng Hijau</span> Desa Sukamaju
+            </h1>
+
+            <p class="text-base sm:text-lg text-kayu-700 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              Temukan ketenangan hamparan sawah terasering, segarnya udara pegunungan yang berembun, serta kehangatan tradisi gotong royong dan karya seni warga yang diwariskan turun-temurun.
+            </p>
+
+            <!-- Tombol Ajakan (CTA) -->
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
+              <a href="#wisata" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-hutan-800 hover:bg-hutan-700 text-white font-semibold shadow-lembut transition-all hover:-translate-y-0.5">
+                <span>Jelajahi Desa</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emas-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M12 5v14M19 12l-7 7-7-7" />
+                </svg>
+              </a>
+
+              <a href="#kontak" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-pasir-100 hover:bg-pasir-200 text-kayu-900 border border-pasir-300 font-semibold transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-terakota-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+                <span>Rencanakan Kunjungan</span>
+              </a>
+            </div>
+
+            <!-- Cuplikan Keunggulan Singkat -->
+            <div class="pt-4 grid grid-cols-3 gap-4 border-t border-pasir-200 max-w-lg mx-auto lg:mx-0">
+              <div>
+                <p class="font-serif font-bold text-xl sm:text-2xl text-hutan-900">18°–23°C</p>
+                <p class="text-xs text-kayu-600 mt-0.5">Suhu Sejuk Alami</p>
+              </div>
+              <div>
+                <p class="font-serif font-bold text-xl sm:text-2xl text-hutan-900">12+</p>
+                <p class="text-xs text-kayu-600 mt-0.5">Sanggar &amp; UMKM</p>
+              </div>
+              <div>
+                <p class="font-serif font-bold text-xl sm:text-2xl text-hutan-900">100%</p>
+                <p class="text-xs text-kayu-600 mt-0.5">Ramah Wisatawan</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kolom Visual Hero Interaktif (Ilustrasi & Foto Pemandangan Lereng Desa) -->
+          <div class="lg:col-span-6">
+            <div class="relative rounded-3xl overflow-hidden shadow-angkat border-4 border-white bg-hutan-900 aspect-[4/3]">
+              <img
+                src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80"
+                alt="Hamparan sawah hijau dan perbukitan asri di Desa Sukamaju saat pagi hari"
+                onerror="this.onerror=null; this.src='https://placehold.co/1200x900/1F4733/FCF9F2?text=Lereng+Hijau+Desa+Sukamaju';"
+                class="w-full h-full object-cover"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-hutan-950/80 via-hutan-950/20 to-transparent"></div>
+
+              <!-- Kartu Info Mengambang di Pojok Bawah -->
+              <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 bg-pasir-50/95 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/60 shadow-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-terakota-600">Sorotan Pagi Hari</span>
+                  <h2 class="font-serif font-bold text-base sm:text-lg text-hutan-950">Kabut Tipis di Terasering Padi &amp; Kebun Kopi</h2>
+                  <p class="text-xs sm:text-sm text-kayu-700">Waktu terbaik berjalan kaki menyusuri pematang: pukul 06.00 – 08.30 WIB.</p>
+                </div>
+                <button
+                  type="button"
+                  onclick="openLightbox(0)"
+                  class="shrink-0 inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-hutan-800 hover:bg-hutan-700 text-white text-xs font-semibold transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                  </svg>
+                  <span>Perbesar</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. BAGIAN PROFIL DESA ==================== -->
+    <section id="profil" class="py-16 sm:py-24 bg-pasir-100/80 pattern-batik border-y border-pasir-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header Bagian -->
+        <div class="max-w-3xl mx-auto text-center mb-12 sm:mb-16 reveal">
+          <span class="inline-block px-3.5 py-1 rounded-full bg-emas-100 text-kayu-800 border border-emas-400/40 text-xs font-bold uppercase tracking-wider mb-3">
+            Profil Desa Sukamaju
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-hutan-950">
+            Menjaga Alam, Merawat Ingatan Budaya
+          </h2>
+          <p class="mt-4 text-base sm:text-lg text-kayu-700 leading-relaxed">
+            Terletak di lereng pegunungan yang subur, Desa Sukamaju tumbuh sebagai komunitas agraris dan kreatif yang memadukan kelestarian hutan lindung, irigasi tradisional, serta keramahan masyarakat desa.
+          </p>
+        </div>
+
+        <!-- Visi, Keasrian Alam, Kearifan Lokal -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-14">
+          <!-- Kartu 1: Visi Desa -->
+          <div class="reveal bg-pasir-50 rounded-3xl p-6 sm:p-8 border border-pasir-200 shadow-lembut hover:shadow-angkat transition-all">
+            <div class="w-12 h-12 rounded-2xl bg-hutan-100 text-hutan-800 flex items-center justify-center mb-5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="6" />
+                <circle cx="12" cy="12" r="2" />
+              </svg>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-hutan-950 mb-2.5">Visi Pembangunan</h3>
+            <p class="text-sm sm:text-base text-kayu-700 leading-relaxed">
+              Mewujudkan Desa Sukamaju sebagai desa wisata ekologi dan budaya yang mandiri, lestari, dan sejahtera berbasis potensi lokal serta partisipasi warga.
+            </p>
+          </div>
+
+          <!-- Kartu 2: Keasrian Alam -->
+          <div class="reveal bg-pasir-50 rounded-3xl p-6 sm:p-8 border border-pasir-200 shadow-lembut hover:shadow-angkat transition-all">
+            <div class="w-12 h-12 rounded-2xl bg-hutan-100 text-hutan-800 flex items-center justify-center mb-5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22V8" />
+                <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+                <path d="M12 8a4 4 0 0 1 4-4c2.2 0 4 1.8 4 4 0 1.5-.8 2.8-2 3.5" />
+                <path d="M12 8a4 4 0 0 0-4-4c-2.2 0-4 1.8-4 4 0 1.5.8 2.8 2 3.5" />
+              </svg>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-hutan-950 mb-2.5">Keasrian Alam Lereng</h3>
+            <p class="text-sm sm:text-base text-kayu-700 leading-relaxed">
+              Dikelilingi hutan pinus dan mata air jernih, sawah bertingkat, serta kebun tumpang sari kopi dan rempah yang menjaga keseimbangan ekosistem pegunungan.
+            </p>
+          </div>
+
+          <!-- Kartu 3: Kearifan Lokal -->
+          <div class="reveal bg-pasir-50 rounded-3xl p-6 sm:p-8 border border-pasir-200 shadow-lembut hover:shadow-angkat transition-all">
+            <div class="w-12 h-12 rounded-2xl bg-terakota-100 text-terakota-600 flex items-center justify-center mb-5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <h3 class="font-serif text-xl font-bold text-hutan-950 mb-2.5">Kearifan Lokal &amp; Adat</h3>
+            <p class="text-sm sm:text-base text-kayu-700 leading-relaxed">
+              Tradisi <em>Sedekah Bumi</em>, pembagian air sawah yang adil, seni karawitan, serta pembatik rumahan menjadi napas kehidupan sehari-hari warga Sukamaju.
+            </p>
+          </div>
+        </div>
+
+        <!-- Statistik Singkat Desa -->
+        <div class="reveal bg-hutan-900 text-pasir-50 rounded-3xl p-6 sm:p-10 shadow-angkat">
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 divide-y-2 lg:divide-y-0 lg:divide-x divide-hutan-700/70">
+            <div class="pt-4 lg:pt-0 lg:px-6 first:pt-0 first:lg:px-0 text-center lg:text-left">
+              <p class="text-xs sm:text-sm uppercase tracking-wider text-emas-400 font-semibold">Luas Wilayah</p>
+              <p class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">482 <span class="text-lg font-sans font-normal text-pasir-200">Ha</span></p>
+              <p class="text-xs text-pasir-200/80 mt-1">Meliputi persawahan, kebun &amp; hutan desa</p>
+            </div>
+
+            <div class="pt-4 lg:pt-0 lg:px-6 text-center lg:text-left">
+              <p class="text-xs sm:text-sm uppercase tracking-wider text-emas-400 font-semibold">Jumlah Warga</p>
+              <p class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">3.420 <span class="text-lg font-sans font-normal text-pasir-200">Jiwa</span></p>
+              <p class="text-xs text-pasir-200/80 mt-1">Tersebar di 4 dusun &amp; 980 kepala keluarga</p>
+            </div>
+
+            <div class="pt-4 lg:pt-0 lg:px-6 text-center lg:text-left">
+              <p class="text-xs sm:text-sm uppercase tracking-wider text-emas-400 font-semibold">Ketinggian Wilayah</p>
+              <p class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">1.150 <span class="text-lg font-sans font-normal text-pasir-200">MDPL</span></p>
+              <p class="text-xs text-pasir-200/80 mt-1">Lereng pegunungan dengan udara bersih</p>
+            </div>
+
+            <div class="pt-4 lg:pt-0 lg:px-6 text-center lg:text-left">
+              <p class="text-xs sm:text-sm uppercase tracking-wider text-emas-400 font-semibold">Kelompok Tani &amp; Seni</p>
+              <p class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">14 <span class="text-lg font-sans font-normal text-pasir-200">Kelompok</span></p>
+              <p class="text-xs text-pasir-200/80 mt-1">Aktif menggerakkan ekowisata &amp; UMKM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 4. BAGIAN WISATA & BUDAYA ==================== -->
+    <section id="wisata" class="py-16 sm:py-24 bg-pasir-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header & Filter Kategori -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12 reveal">
+          <div class="max-w-2xl">
+            <span class="inline-block px-3.5 py-1 rounded-full bg-hutan-100 text-hutan-800 text-xs font-bold uppercase tracking-wider mb-3">
+              Wisata &amp; Budaya
+            </span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-hutan-950">
+              Ragam Pesona Alam &amp; Tradisi Desa
+            </h2>
+            <p class="mt-3 text-base text-kayu-700">
+              Pilih kategori di bawah ini untuk menemukan pengalaman wisata alam, warisan budaya, maupun aktivitas warga yang sedang berlangsung.
+            </p>
+          </div>
+
+          <!-- Tombol Filter Kategori -->
+          <div id="wisata-filters" class="flex flex-wrap gap-2" role="group" aria-label="Filter kategori wisata dan budaya">
+            <button data-filter="semua" class="filter-btn active px-4 py-2 rounded-xl text-sm font-semibold bg-hutan-800 text-white shadow-sm transition-all">
+              Semua
+            </button>
+            <button data-filter="alam" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold bg-pasir-100 hover:bg-pasir-200 text-kayu-800 border border-pasir-200 transition-all">
+              Wisata Alam
+            </button>
+            <button data-filter="budaya" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold bg-pasir-100 hover:bg-pasir-200 text-kayu-800 border border-pasir-200 transition-all">
+              Seni &amp; Budaya
+            </button>
+            <button data-filter="aktivitas" class="filter-btn px-4 py-2 rounded-xl text-sm font-semibold bg-pasir-100 hover:bg-pasir-200 text-kayu-800 border border-pasir-200 transition-all">
+              Aktivitas Warga
+            </button>
+          </div>
+        </div>
+
+        <!-- Grid Destinasi Wisata & Budaya (Diisi dinamis oleh JavaScript agar filter responsif & rapi) -->
+        <div id="wisata-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 5. BAGIAN PRODUK LOKAL / UMKM ==================== -->
+    <section id="produk" class="py-16 sm:py-24 bg-hutan-50/70 border-y border-pasir-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-12 sm:mb-14 reveal">
+          <span class="inline-block px-3.5 py-1 rounded-full bg-terakota-100 text-terakota-600 text-xs font-bold uppercase tracking-wider mb-3">
+            Produk Lokal &amp; UMKM
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-hutan-950">
+            Buah Tangan Penuh Makna dari Sukamaju
+          </h2>
+          <p class="mt-3 text-base sm:text-lg text-kayu-700">
+            Setiap produk diolah langsung oleh perajin dan petani desa dengan bahan alami pilihan. Klik salah satu produk untuk melihat detail dan panduan pemesanan.
+          </p>
+        </div>
+
+        <!-- Grid Produk UMKM -->
+        <div id="produk-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 6. BAGIAN GALERI FOTO INTERAKTIF ==================== -->
+    <section id="galeri" class="py-16 sm:py-24 bg-pasir-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 sm:mb-12 reveal">
+          <div>
+            <span class="inline-block px-3.5 py-1 rounded-full bg-emas-100 text-kayu-800 border border-emas-400/40 text-xs font-bold uppercase tracking-wider mb-3">
+              Galeri Visual
+            </span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-hutan-950">
+              Potret Kehidupan &amp; Keindahan Desa
+            </h2>
+          </div>
+          <p class="text-sm text-kayu-600">
+            Klik foto mana pun untuk membuka tampilan penuh (<em>lightbox</em>).
+          </p>
+        </div>
+
+        <!-- Grid Galeri Foto -->
+        <div id="galeri-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"></div>
+      </div>
+    </section>
+
+    <!-- ==================== 7. BAGIAN KONTAK & LOKASI ==================== -->
+    <section id="kontak" class="py-16 sm:py-24 bg-pasir-100/90 border-t border-pasir-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-12 sm:mb-14 reveal">
+          <span class="inline-block px-3.5 py-1 rounded-full bg-hutan-100 text-hutan-800 text-xs font-bold uppercase tracking-wider mb-3">
+            Kontak &amp; Lokasi
+          </span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-hutan-950">
+            Mari Berkunjung &amp; Berdiskusi dengan Kami
+          </h2>
+          <p class="mt-3 text-base sm:text-lg text-kayu-700">
+            Baik untuk kunjungan wisata keluarga, studi lapangan, pemesanan produk UMKM, maupun pendampingan komunitas, tim pengelola desa siap menyambut Anda.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Kolom Informasi Alamat, Jam Kunjungan & Peta Lokasi Interaktif -->
+          <div class="lg:col-span-5 space-y-6 reveal">
+            <div class="bg-pasir-50 rounded-3xl p-6 sm:p-7 border border-pasir-200 shadow-lembut space-y-5">
+              <!-- Alamat -->
+              <div class="flex items-start gap-4">
+                <div class="w-11 h-11 rounded-2xl bg-hutan-100 text-hutan-800 flex items-center justify-center shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-serif font-bold text-base text-hutan-950">Alamat Balai &amp; Pusat Informasi Desa</h3>
+                  <p class="text-sm text-kayu-700 mt-1 leading-relaxed">
+                    Jl. Raya Lereng Argapura KM 14, Dusun Krajan, Desa Sukamaju, Kec. Sumber Asri, Kab. Pegunungan Hijau, Jawa Barat 44182
+                  </p>
+                </div>
+              </div>
+
+              <!-- Jam Kunjungan -->
+              <div class="flex items-start gap-4">
+                <div class="w-11 h-11 rounded-2xl bg-emas-100 text-kayu-800 flex items-center justify-center shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-serif font-bold text-base text-hutan-950">Jam Kunjungan &amp; Pelayanan</h3>
+                  <p class="text-sm text-kayu-700 mt-1">
+                    <span class="font-medium text-kayu-900">Wisata Alam &amp; Desa:</span> Setiap Hari, 06.00 – 17.30 WIB<br />
+                    <span class="font-medium text-kayu-900">Balai Informasi &amp; Sanggar:</span> Selasa – Minggu, 08.00 – 16.00 WIB
+                  </p>
+                </div>
+              </div>
+
+              <!-- Telepon & Email -->
+              <div class="flex items-start gap-4">
+                <div class="w-11 h-11 rounded-2xl bg-terakota-100 text-terakota-600 flex items-center justify-center shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-serif font-bold text-base text-hutan-950">Narahubung Resmi Desa</h3>
+                  <p class="text-sm text-kayu-700 mt-1">
+                    Telepon / WhatsApp: <span class="font-medium text-kayu-900">+62 812-3456-7890</span><br />
+                    Email: <span class="font-medium text-kayu-900">halo@desasukamaju.id</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Denah Lokasi Ilustratif Interaktif -->
+            <div class="bg-hutan-900 text-pasir-50 rounded-3xl p-6 shadow-lembut">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-bold uppercase tracking-wider text-emas-400">Panduan Akses Lokasi</span>
+                <span class="text-xs px-2.5 py-1 rounded-full bg-hutan-800 text-pasir-100">± 45 Menit dari Kota</span>
+              </div>
+              <p class="text-sm text-pasir-100/90 leading-relaxed mb-4">
+                Akses jalan beraspal baik hingga pusat desa dan area parkir wisata. Kendaraan roda dua dan mobil MPV dapat melintas dengan nyaman.
+              </p>
+              <div class="rounded-2xl bg-hutan-800/90 p-4 border border-hutan-700 flex items-center justify-between gap-3">
+                <div class="text-xs text-pasir-100">
+                  <p class="font-semibold text-white">Titik Kumpul: Balai Desa Sukamaju</p>
+                  <p class="text-pasir-200/80 mt-0.5">Koordinat Lereng: 7.184° LS, 107.612° BT</p>
+                </div>
+                <button
+                  type="button"
+                  id="copy-coord-btn"
+                  class="shrink-0 px-3 py-2 rounded-xl bg-emas-500 hover:bg-emas-400 text-hutan-950 text-xs font-bold transition-colors">
+                  Salin Koordinat
+                </button>
+              </div>
+              <p id="copy-feedback" class="text-xs text-emas-400 mt-2 hidden">Koordinat lokasi berhasil disalin ke papan klip.</p>
+            </div>
+          </div>
+
+          <!-- Kolom Formulir Pertanyaan / Pesan Pengunjung -->
+          <div class="lg:col-span-7 reveal">
+            <div class="bg-pasir-50 rounded-3xl p-6 sm:p-9 border border-pasir-200 shadow-lembut">
+              <h3 class="font-serif text-2xl font-bold text-hutan-950 mb-2">Kirim Pesan atau Rencana Kunjungan</h3>
+              <p class="text-sm text-kayu-700 mb-6">
+                Isi formulir di bawah ini untuk menanyakan jadwal tur desa, kelas membatik, atau pemesanan produk lokal.
+              </p>
+
+              <form id="contact-form" class="space-y-5" novalidate>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="nama" class="block text-sm font-semibold text-kayu-900 mb-1.5">Nama Lengkap <span class="text-terakota-600">*</span></label>
+                    <input
+                      type="text"
+                      id="nama"
+                      name="nama"
+                      required
+                      placeholder="Contoh: Rina Wijaya"
+                      class="w-full px-4 py-3 rounded-xl bg-white border border-pasir-300 text-kayu-900 placeholder:text-kayu-600/50 focus:outline-none focus:ring-2 focus:ring-hutan-600 focus:border-transparent transition"
+                    />
+                  </div>
+
+                  <div>
+                    <label for="email" class="block text-sm font-semibold text-kayu-900 mb-1.5">Alamat Email <span class="text-terakota-600">*</span></label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      placeholder="rina@contoh.com"
+                      class="w-full px-4 py-3 rounded-xl bg-white border border-pasir-300 text-kayu-900 placeholder:text-kayu-600/50 focus:outline-none focus:ring-2 focus:ring-hutan-600 focus:border-transparent transition"
+                    />
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <label for="topik" class="block text-sm font-semibold text-kayu-900 mb-1.5">Keperluan / Topik</label>
+                    <select
+                      id="topik"
+                      name="topik"
+                      class="w-full px-4 py-3 rounded-xl bg-white border border-pasir-300 text-kayu-900 focus:outline-none focus:ring-2 focus:ring-hutan-600 focus:border-transparent transition">
+                      <option value="Rencana Kunjungan Wisata">Rencana Kunjungan Wisata</option>
+                      <option value="Workshop Seni & Batik">Workshop Seni &amp; Batik</option>
+                      <option value="Pemesanan Produk UMKM">Pemesanan Produk UMKM</option>
+                      <option value="Kunjungan Edukasi / Studi">Kunjungan Edukasi / Studi</option>
+                      <option value="Pertanyaan Umum">Pertanyaan Umum</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label for="tanggal" class="block text-sm font-semibold text-kayu-900 mb-1.5">Perkiraan Tanggal (Opsional)</label>
+                    <input
+                      type="date"
+                      id="tanggal"
+                      name="tanggal"
+                      class="w-full px-4 py-3 rounded-xl bg-white border border-pasir-300 text-kayu-900 focus:outline-none focus:ring-2 focus:ring-hutan-600 focus:border-transparent transition"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="pesan" class="block text-sm font-semibold text-kayu-900 mb-1.5">Pesan atau Catatan Tambahan <span class="text-terakota-600">*</span></label>
+                  <textarea
+                    id="pesan"
+                    name="pesan"
+                    rows="4"
+                    required
+                    placeholder="Ceritakan jumlah rombongan, destinasi yang ingin dikunjungi, atau produk yang diminati..."
+                    class="w-full px-4 py-3 rounded-xl bg-white border border-pasir-300 text-kayu-900 placeholder:text-kayu-600/50 focus:outline-none focus:ring-2 focus:ring-hutan-600 focus:border-transparent transition resize-y"
+                  ></textarea>
+                </div>
+
+                <!-- Kotak Notifikasi Validasi atau Konfirmasi Pengiriman -->
+                <div id="form-feedback" class="hidden rounded-2xl p-4 text-sm font-medium" role="alert"></div>
+
+                <button
+                  type="submit"
+                  class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-terakota-600 hover:bg-terakota-500 text-white font-semibold shadow-lembut transition-all hover:-translate-y-0.5">
+                  <span>Kirim Pesan Sekarang</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-hutan-950 text-pasir-200 pt-14 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-hutan-800">
+        <!-- Brand -->
+        <div class="lg:col-span-2 space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-hutan-800 text-emas-400 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M8 21l4-10 4 10" />
+                <path d="M2 21l6-14 3.5 7" />
+                <path d="M14.5 14L18 7l4 14" />
+                <path d="M2 21h20" />
+              </svg>
+            </div>
+            <span class="font-serif font-bold text-xl text-white">Desa Sukamaju</span>
+          </div>
+          <p class="text-sm text-pasir-200/80 max-w-md leading-relaxed">
+            Portal informasi resmi wisata alam, pelestarian seni budaya, dan produk UMKM warga Desa Sukamaju di lereng pegunungan hijau.
+          </p>
+        </div>
+
+        <!-- Tautan Cepat -->
+        <div>
+          <h4 class="font-serif font-bold text-white text-base mb-3">Jelajahi</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#profil" class="hover:text-emas-400 transition-colors">Profil Desa</a></li>
+            <li><a href="#wisata" class="hover:text-emas-400 transition-colors">Wisata &amp; Budaya</a></li>
+            <li><a href="#produk" class="hover:text-emas-400 transition-colors">Produk Lokal</a></li>
+            <li><a href="#galeri" class="hover:text-emas-400 transition-colors">Galeri Foto</a></li>
+          </ul>
+        </div>
+
+        <!-- Jam & Kontak Singkat -->
+        <div>
+          <h4 class="font-serif font-bold text-white text-base mb-3">Informasi Kunjungan</h4>
+          <ul class="space-y-2 text-sm text-pasir-200/80">
+            <li>Buka Setiap Hari: 06.00 – 17.30 WIB</li>
+            <li>WA: +62 812-3456-7890</li>
+            <li>Email: halo@desasukamaju.id</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-pasir-200/70">
+        <p>© <span id="tahun-sekarang">2026</span> Pemerintah &amp; Kelompok Sadar Wisata Desa Sukamaju. Seluruh hak cipta dilindungi.</p>
+        <p>Dibangun dengan semangat gotong royong &amp; pelestarian alam.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL DETAIL PRODUK / WISATA ==================== -->
+  <div id="info-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-hutan-950/70 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
+    <div class="modal-animate bg-pasir-50 rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl border border-pasir-200">
+      <div class="relative h-56 sm:h-64 bg-hutan-900">
+        <img id="info-modal-img" src="" alt="" class="w-full h-full object-cover" />
+        <button
+          id="close-info-modal"
+          type="button"
+          aria-label="Tutup jendela informasi"
+          class="absolute top-4 right-4 w-10 h-10 rounded-full bg-pasir-50/95 hover:bg-white text-hutan-950 flex items-center justify-center shadow-md transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+        <span id="info-modal-badge" class="absolute bottom-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-emas-500 text-hutan-950 shadow"></span>
+      </div>
+
+      <div class="p-6 sm:p-7 space-y-4">
+        <div class="flex items-start justify-between gap-4">
+          <h3 id="info-modal-title" class="font-serif text-2xl font-bold text-hutan-950"></h3>
+          <span id="info-modal-meta" class="text-sm font-bold text-terakota-600 shrink-0"></span>
+        </div>
+
+        <p id="info-modal-desc" class="text-sm sm:text-base text-kayu-700 leading-relaxed"></p>
+
+        <div id="info-modal-extra" class="rounded-2xl bg-pasir-100 p-4 border border-pasir-200 text-xs sm:text-sm text-kayu-800 space-y-1"></div>
+
+        <div class="pt-2 flex flex-col sm:flex-row gap-3 justify-end">
+          <button
+            type="button"
+            id="close-info-modal-secondary"
+            class="px-5 py-2.5 rounded-xl bg-pasir-200 hover:bg-pasir-300 text-kayu-900 text-sm font-semibold transition">
+            Tutup
+          </button>
+          <a
+            id="info-modal-cta"
+            href="#kontak"
+            class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-hutan-800 hover:bg-hutan-700 text-white text-sm font-semibold transition">
+            <span>Tanyakan / Pesan Sekarang</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL LIGHTBOX GALERI FOTO ==================== -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-hutan-950/90 backdrop-blur-md" role="dialog" aria-modal="true" aria-label="Pratinjau foto galeri">
+    <div class="modal-animate max-w-4xl w-full space-y-4">
+      <div class="flex items-center justify-between text-pasir-100">
+        <div>
+          <span id="lightbox-counter" class="text-xs uppercase tracking-widest text-emas-400 font-semibold"></span>
+          <h3 id="lightbox-title" class="font-serif text-lg sm:text-xl font-bold text-white"></h3>
+        </div>
+        <button
+          id="close-lightbox"
+          type="button"
+          aria-label="Tutup pratinjau foto"
+          class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="relative rounded-2xl overflow-hidden bg-black aspect-[16/10] shadow-2xl">
+        <img id="lightbox-img" src="" alt="" class="w-full h-full object-cover" />
+
+        <!-- Tombol Sebelumnya & Berikutnya -->
+        <button
+          id="prev-lightbox"
+          type="button"
+          aria-label="Foto sebelumnya"
+          class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-hutan-950/75 hover:bg-hutan-900 text-white flex items-center justify-center transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+
+        <button
+          id="next-lightbox"
+          type="button"
+          aria-label="Foto berikutnya"
+          class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-hutan-950/75 hover:bg-hutan-900 text-white flex items-center justify-center transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </div>
+
+      <p id="lightbox-caption" class="text-sm sm:text-base text-pasir-200 text-center max-w-2xl mx-auto"></p>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT INTERAKTIF ==================== -->
+  <script>
+    // Data Wisata & Budaya Desa Sukamaju
+    const wisataData = [
+      {
+        id: 'terasering',
+        nama: 'Sawah Terasering Sukamaju',
+        kategori: 'alam',
+        labelKategori: 'Wisata Alam',
+        waktu: '06.00 – 17.00 WIB',
+        lokasi: 'Dusun Lebak Sari',
+        ringkasan: 'Hamparan petak sawah bertingkat yang dialiri irigasi gunung dengan panorama hijau menenangkan sepanjang musim.',
+        detail: 'Jalur pematang yang tertata rapi memudahkan pengunjung berjalan santai sambil belajar sistem pengairan tradisional dan siklus tanam padi lereng.',
+        gambar: 'https://images.unsplash.com/photo-1536632620703-ee43350c635d?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://placehold.co/900x600/2A5E44/FCF9F2?text=Sawah+Terasering+Sukamaju'
+      },
+      {
+        id: 'air-terjun-embun',
+        nama: 'Air Terjun Embun',
+        kategori: 'alam',
+        labelKategori: 'Wisata Alam',
+        waktu: '07.00 – 16.00 WIB',
+        lokasi: 'Batas Hutan Pinus Utara',
+        ringkasan: 'Curug bertingkat di tengah rindangnya pepohonan dengan butiran air sejuk dan suara gemericik alami.',
+        detail: 'Ditempuh melalui jalan setapak teduh sekitar 25 menit dari pos utama. Dilengkapi gazebo kayu, tempat duduk alami, dan pemandu lokal.',
+        gambar: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://placehold.co/900x600/1F4733/FCF9F2?text=Air+Terjun+Embun'
+      },
+      {
+        id: 'sanggar-batik',
+        nama: 'Sanggar Seni & Batik Tulis',
+        kategori: 'budaya',
+        labelKategori: 'Seni & Budaya',
+        waktu: '09.00 – 15.30 WIB',
+        lokasi: 'Balai Budaya Dusun Krajan',
+        ringkasan: 'Ruang belajar membatik motif daun pakis, kopi, dan lereng gunung serta latihan seni tari dan musik tradisional.',
+        detail: 'Pengunjung dapat mencoba mencanting dengan lilin malam hangat dan mengenal pewarna alam dari dedaunan serta kulit kayu lokal.',
+        gambar: 'https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://placehold.co/900x600/6B4B33/FCF9F2?text=Sanggar+Seni+%26+Batik+Tulis'
+      },
+      {
+        id: 'pasar-tani',
+        nama: 'Pasar Tani Mingguan',
+        kategori: 'aktivitas',
+        labelKategori: 'Aktivitas Warga',
+        waktu: 'Setiap Minggu, 06.30 – 11.00 WIB',
+        lokasi: 'Pelataran Balai Desa',
+        ringkasan: 'Lapak warga yang menjual sayuran organik baru dipanen, umbi rebus, jajanan pasar, dan seduhan kopi hangat.',
+        detail: 'Suasana akrab tanpa kemasan plastik berlebih—pengunjung disarankan membawa tas belanja kain sendiri untuk mendukung gerakan desa ramah lingkungan.',
+        gambar: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=900&q=80',
+        fallback: 'https://placehold.co/900x600/C85A32/FCF9F2?text=Pasar+Tani+Mingguan'
+      }
+    ];
+
+    // Data Produk Lokal / UMKM Desa Sukamaju
+    const produkData = [
+      {
+        id: 'kopi-arabika',
+        nama: 'Kopi Arabika Lereng',
+        produsen: 'Kelompok Tani Harapan Jaya',
+        harga: 'Rp 58.000 / 200g',
+        kategori: 'Minuman & Hasil Kebun',
+        ringkasan: 'Biji kopi arabika pilihan dari ketinggian 1.150 MDPL dengan aroma karamel lembut dan sentuhan buah segar.',
+        detail: 'Dipetik merah oleh petani lokal dan disangrai bertahap agar karakter rasanya terjaga. Tersedia dalam bentuk biji utuh maupun giling halus/sedang.',
+        pengemasan: 'Kemasan pouch kedap udara dengan katup aroma, siap kirim atau diambil langsung di galeri desa.',
+        gambar: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=800&q=80',
+        fallback: 'https://placehold.co/800x600/4A3322/FCF9F2?text=Kopi+Arabika+Lereng'
+      },
+      {
+        id: 'madu-hutan',
+        nama: 'Madu Hutan Asli',
+        produsen: 'Paguyuban Wana Lestari',
+        harga: 'Rp 85.000 / 350ml',
+        kategori: 'Produk Alam Murni',
+        ringkasan: 'Madu murni hasil panen lestari dari nektar bunga hutan dan tanaman perkebunan lereng pegunungan.',
+        detail: 'Dipanen tanpa merusak sarang lebah dan tanpa proses pemanasan berlebih sehingga enzim serta rasa alami madu tetap terjaga.',
+        pengemasan: 'Botol kaca tebal tersegel rapi, cocok untuk konsumsi keluarga maupun bingkisan sehat.',
+        gambar: 'https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80',
+        fallback: 'https://placehold.co/800x600/D49B27/2E1F14?text=Madu+Hutan+Asli'
+      },
+      {
+        id: 'kerajinan-bambu',
+        nama: 'Kerajinan Anyaman Bambu',
+        produsen: 'Perajin Bambu Mekar Sari',
+        harga: 'Mulai Rp 35.000',
+        kategori: 'Kerajinan Tangan',
+        ringkasan: 'Wadah saji, keranjang piknik, dan kap lampu anyaman bambu apus yang kuat serta bernilai estetika tinggi.',
+        detail: 'Bambu dipilih dari rumpun dewasa, melalui proses perendaman alami agar awet dan tidak mudah lapuk, lalu dianyam tangan dengan presisi.',
+        pengemasan: 'Dilapisi pelindung serat alami dan dikemas aman untuk dibawa pulang sebagai dekorasi rumah.',
+        gambar: 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=800&q=80',
+        fallback: 'https://placehold.co/800x600/8A6345/FCF9F2?text=Kerajinan+Bambu'
+      },
+      {
+        id: 'batik-khas-desa',
+        nama: 'Batik Tulis Khas Sukamaju',
+        produsen: 'Sanggar Sekar Arum',
+        harga: 'Mulai Rp 165.000',
+        kategori: 'Wastra & Budaya',
+        ringkasan: 'Kain katun dan tenun pilihan bermotif lereng gunung, sulur pakis, dan butiran kopi yang sarat filosofi.',
+        detail: 'Dikerjakan oleh pembatik warga desa dengan perpaduan teknik canting tulis dan pewarnaan yang berkarakter hangat.',
+        pengemasan: 'Dikemas rapi dalam kain pelindung dan boks khas desa, pas untuk busana acara maupun koleksi.',
+        gambar: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=800&q=80',
+        fallback: 'https://placehold.co/800x600/C85A32/FCF9F2?text=Batik+Khas+Desa'
+      }
+    ];
+
+    // Data Galeri Foto Interaktif (index 0 juga dipakai pada tombol Perbesar di Hero)
+    const galeriData = [
+      {
+        judul: 'Kabut Pagi di Hamparan Terasering',
+        keterangan: 'Sinar matahari pertama menyapa petak sawah hijau dan barisan pohon di lereng Desa Sukamaju.',
+        gambar: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
+        fallback: 'https://placehold.co/1200x800/1F4733/FCF9F2?text=Kabut+Pagi+Terasering'
+      },
+      {
+        judul: 'Kesegaran Aliran Air Terjun Embun',
+        keterangan: 'Suasana sejuk di sekitar air terjun yang dikelilingi pepohonan rindang dan bebatuan alami.',
+        gambar: 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=1200&q=80',
+        fallback: 'https://placehold.co/1200x800/2A5E44/FCF9F2?text=Air+Terjun+Embun'
+      },
+      {
+        judul: 'Proses Sangrai & Seduh Kopi Lereng',
+        keterangan: 'Aroma khas kopi arabika pegunungan yang menjadi kebanggaan petani dan kedai warga.',
+        gambar: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=80',
+        fallback: 'https://placehold.co/1200x800/4A3322/FCF9F2?text=Kopi+Lereng+Sukamaju'
+      },
+      {
+        judul: 'Hasil Panen Segar di Pasar Tani',
+        keterangan: 'Sayuran dan hasil kebun segar yang dijajakan langsung oleh petani setiap akhir pekan.',
+        gambar: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=1200&q=80',
+        fallback: 'https://placehold.co/1200x800/C85A32/FCF9F2?text=Pasar+Tani+Sukamaju'
+      },
+      {
+        judul: 'Motif & Karya Kerajinan Lokal',
+        keterangan: 'Sentuhan keterampilan tangan warga yang memadukan fungsi sehari-hari dan keindahan motif.',
+        gambar: 'https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?auto=format&fit=crop&w=1200&q=80',
+        fallback: 'https://placehold.co/1200x800/6B4B33/FCF9F2?text=Karya+Budaya+Sukamaju'
+      },
+      {
+        judul: 'Jalur Hijau Menuju Hutan Desa',
+        keterangan: 'Udara bersih dan keteduhan pepohonan menjadikan jalan desa nyaman untuk bersepeda atau berjalan kaki.',
+        gambar: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80',
+        fallback: 'https://placehold.co/1200x800/183627/FCF9F2?text=Jalur+Hijau+Hutan+Desa'
+      }
+    ];
+
+    // Elemen DOM utama
+    const wisataGrid = document.getElementById('wisata-grid');
+    const produkGrid = document.getElementById('produk-grid');
+    const galeriGrid = document.getElementById('galeri-grid');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    // Render kartu Wisata & Budaya berdasarkan kategori terpilih
+    function renderWisata(kategori = 'semua') {
+      const filtered = kategori === 'semua'
+        ? wisataData
+        : wisataData.filter((item) => item.kategori === kategori);
+
+      wisataGrid.innerHTML = filtered.map((item) => `
+        <article class="group bg-pasir-50 rounded-3xl overflow-hidden border border-pasir-200 shadow-lembut hover:shadow-angkat transition-all flex flex-col">
+          <div class="relative aspect-[16/10] overflow-hidden bg-hutan-900">
+            <img
+              src="${item.gambar}"
+              alt="${item.nama}"
+              onerror="this.onerror=null; this.src='${item.fallback}';"
+              class="w-full h-full object-cover img-zoom"
+            />
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-pasir-50/95 text-hutan-900 shadow-sm">
+              ${item.labelKategori}
+            </span>
+          </div>
+
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-2.5">
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-kayu-600 font-medium">
+                <span>${item.lokasi}</span>
+                <span>•</span>
+                <span>${item.waktu}</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-bold text-hutan-950 group-hover:text-hutan-700 transition-colors">
+                ${item.nama}
+              </h3>
+              <p class="text-sm sm:text-base text-kayu-700 leading-relaxed">
+                ${item.ringkasan}
+              </p>
+            </div>
+
+            <div class="pt-2 flex items-center justify-between border-t border-pasir-200/80">
+              <button
+                type="button"
+                onclick="openWisataModal('${item.id}')"
+                class="inline-flex items-center gap-1.5 text-sm font-semibold text-terakota-600 hover:text-terakota-500 transition-colors">
+                <span>Lihat Detail Destinasi</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // Event listener tombol filter Wisata & Budaya
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach((b) => {
+          b.classList.remove('active', 'bg-hutan-800', 'text-white', 'shadow-sm');
+          b.classList.add('bg-pasir-100', 'hover:bg-pasir-200', 'text-kayu-800', 'border', 'border-pasir-200');
+        });
+
+        btn.classList.add('active', 'bg-hutan-800', 'text-white', 'shadow-sm');
+        btn.classList.remove('bg-pasir-100', 'hover:bg-pasir-200', 'text-kayu-800', 'border', 'border-pasir-200');
+
+        renderWisata(btn.dataset.filter);
+      });
+    });
+
+    // Render kartu Produk Lokal / UMKM
+    function renderProduk() {
+      produkGrid.innerHTML = produkData.map((item) => `
+        <article class="group bg-pasir-50 rounded-3xl overflow-hidden border border-pasir-200 shadow-lembut hover:shadow-angkat transition-all flex flex-col">
+          <div class="relative aspect-[4/3] overflow-hidden bg-hutan-900">
+            <img
+              src="${item.gambar}"
+              alt="${item.nama}"
+              onerror="this.onerror=null; this.src='${item.fallback}';"
+              class="w-full h-full object-cover img-zoom"
+            />
+          </div>
+
+          <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <span class="inline-block text-[11px] font-bold uppercase tracking-wider text-hutan-700">
+                ${item.kategori}
+              </span>
+              <h3 class="font-serif text-lg sm:text-xl font-bold text-hutan-950">
+                ${item.nama}
+              </h3>
+              <p class="text-xs sm:text-sm text-kayu-700 leading-relaxed">
+                ${item.ringkasan}
+              </p>
+            </div>
+
+            <div class="pt-3 border-t border-pasir-200 space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-kayu-600">Kisaran Harga</span>
+                <span class="font-bold text-sm text-terakota-600">${item.harga}</span>
+              </div>
+              <button
+                type="button"
+                onclick="openProdukModal('${item.id}')"
+                class="w-full py-2.5 px-4 rounded-xl bg-hutan-800 hover:bg-hutan-700 text-white text-xs sm:text-sm font-semibold transition-colors">
+                Info &amp; Pemesanan
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // Render Galeri Foto
+    function renderGaleri() {
+      galeriGrid.innerHTML = galeriData.map((foto, idx) => `
+        <button
+          type="button"
+          onclick="openLightbox(${idx})"
+          class="group relative aspect-[4/3] rounded-3xl overflow-hidden bg-hutan-900 border border-pasir-200 shadow-lembut hover:shadow-angkat text-left focus:outline-none focus:ring-2 focus:ring-hutan-600">
+          <img
+            src="${foto.gambar}"
+            alt="${foto.judul}"
+            onerror="this.onerror=null; this.src='${foto.fallback}';"
+            class="w-full h-full object-cover img-zoom"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-hutan-950/80 via-transparent to-transparent opacity-90 group-hover:opacity-100 transition-opacity"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <p class="font-serif font-bold text-base sm:text-lg leading-snug">${foto.judul}</p>
+            <p class="text-xs text-pasir-200/90 mt-1 line-clamp-1">Klik untuk memperbesar foto</p>
+          </div>
+        </button>
+      `).join('');
+    }
+
+    // Logika Modal Informasi (Wisata & Produk)
+    const infoModal = document.getElementById('info-modal');
+    const closeInfoModalBtn = document.getElementById('close-info-modal');
+    const closeInfoModalSecondary = document.getElementById('close-info-modal-secondary');
+    const infoModalCta = document.getElementById('info-modal-cta');
+
+    function openWisataModal(id) {
+      const item = wisataData.find((w) => w.id === id);
+      if (!item) return;
+
+      document.getElementById('info-modal-img').src = item.gambar;
+      document.getElementById('info-modal-img').alt = item.nama;
+      document.getElementById('info-modal-badge').textContent = item.labelKategori;
+      document.getElementById('info-modal-title').textContent = item.nama;
+      document.getElementById('info-modal-meta').textContent = item.waktu;
+      document.getElementById('info-modal-desc').textContent = `${item.ringkasan} ${item.detail}`;
+      document.getElementById('info-modal-extra').innerHTML = `
+        <p><strong class="text-hutan-950">Lokasi:</strong> ${item.lokasi}</p>
+        <p><strong class="text-hutan-950">Jam Operasional:</strong> ${item.waktu}</p>
+      `;
+
+      // Sesuaikan topik otomatis di form kontak saat tombol CTA modal diklik
+      infoModalCta.onclick = () => {
+        const topikSelect = document.getElementById('topik');
+        const pesanField = document.getElementById('pesan');
+        if (topikSelect) {
+          topikSelect.value = item.kategori === 'budaya' ? 'Workshop Seni & Batik' : 'Rencana Kunjungan Wisata';
+        }
+        if (pesanField && !pesanField.value.trim()) {
+          pesanField.value = `Halo pengelola Desa Sukamaju, saya ingin bertanya tentang kunjungan ke ${item.nama}.`;
+        }
+        closeInfoModal();
+      };
+
+      infoModal.classList.remove('hidden');
+      infoModal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function openProdukModal(id) {
+      const item = produkData.find((p) => p.id === id);
+      if (!item) return;
+
+      document.getElementById('info-modal-img').src = item.gambar;
+      document.getElementById('info-modal-img').alt = item.nama;
+      document.getElementById('info-modal-badge').textContent = item.kategori;
+      document.getElementById('info-modal-title').textContent = item.nama;
+      document.getElementById('info-modal-meta').textContent = item.harga;
+      document.getElementById('info-modal-desc').textContent = `${item.ringkasan} ${item.detail}`;
+      document.getElementById('info-modal-extra').innerHTML = `
+        <p><strong class="text-hutan-950">Kelompok / Produsen:</strong> ${item.produsen}</p>
+        <p><strong class="text-hutan-950">Pengemasan &amp; Layanan:</strong> ${item.pengemasan}</p>
+        <p><strong class="text-hutan-950">Cara Pemesanan:</strong> Hubungi kontak desa atau kirim pesan melalui formulir untuk konfirmasi stok dan pengiriman.</p>
+      `;
+
+      infoModalCta.onclick = () => {
+        const topikSelect = document.getElementById('topik');
+        const pesanField = document.getElementById('pesan');
+        if (topikSelect) {
+          topikSelect.value = 'Pemesanan Produk UMKM';
+        }
+        if (pesanField && !pesanField.value.trim()) {
+          pesanField.value = `Halo pengelola Desa Sukamaju, saya tertarik memesan ${item.nama} (${item.harga}). Mohon info ketersediaannya.`;
+        }
+        closeInfoModal();
+      };
+
+      infoModal.classList.remove('hidden');
+      infoModal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeInfoModal() {
+      infoModal.classList.add('hidden');
+      infoModal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    closeInfoModalBtn.addEventListener('click', closeInfoModal);
+    closeInfoModalSecondary.addEventListener('click', closeInfoModal);
+    infoModal.addEventListener('click', (e) => {
+      if (e.target === infoModal) closeInfoModal();
+    });
+
+    // Logika Lightbox Galeri Foto
+    const lightboxModal = document.getElementById('lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+    let currentLightboxIndex = 0;
+
+    function updateLightbox(index) {
+      currentLightboxIndex = (index + galeriData.length) % galeriData.length;
+      const foto = galeriData[currentLightboxIndex];
+      lightboxImg.src = foto.gambar;
+      lightboxImg.alt = foto.judul;
+      lightboxTitle.textContent = foto.judul;
+      lightboxCaption.textContent = foto.keterangan;
+      lightboxCounter.textContent = `Foto ${currentLightboxIndex + 1} dari ${galeriData.length}`;
+    }
+
+    function openLightbox(index) {
+      updateLightbox(index);
+      lightboxModal.classList.remove('hidden');
+      lightboxModal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightboxModal.classList.add('hidden');
+      lightboxModal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('close-lightbox').addEventListener('click', closeLightbox);
+    document.getElementById('prev-lightbox').addEventListener('click', () => updateLightbox(currentLightboxIndex - 1));
+    document.getElementById('next-lightbox').addEventListener('click', () => updateLightbox(currentLightboxIndex + 1));
+
+    lightboxModal.addEventListener('click', (e) => {
+      if (e.target === lightboxModal) closeLightbox();
+    });
+
+    // Navigasi keyboard untuk modal & lightbox
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeInfoModal();
+        closeLightbox();
+      } else if (!lightboxModal.classList.contains('hidden')) {
+        if (e.key === 'ArrowLeft') updateLightbox(currentLightboxIndex - 1);
+        if (e.key === 'ArrowRight') updateLightbox(currentLightboxIndex + 1);
+      }
+    });
+
+    // Menu navigasi mobile
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIconOpen = document.getElementById('menu-icon-open');
+    const menuIconClose = document.getElementById('menu-icon-close');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      menuIconOpen.classList.toggle('hidden', !isOpen);
+      menuIconClose.classList.toggle('hidden', isOpen);
+      mobileMenuBtn.setAttribute('aria-expanded', String(!isOpen));
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuIconOpen.classList.remove('hidden');
+        menuIconClose.classList.add('hidden');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Salin koordinat lokasi
+    const copyCoordBtn = document.getElementById('copy-coord-btn');
+    const copyFeedback = document.getElementById('copy-feedback');
+    copyCoordBtn.addEventListener('click', () => {
+      const coordText = '-7.184, 107.612 (Balai Desa Sukamaju)';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(coordText).catch(() => {});
+      }
+      copyFeedback.classList.remove('hidden');
+      setTimeout(() => copyFeedback.classList.add('hidden'), 3000);
+    });
+
+    // Penanganan pengiriman formulir kontak dengan konfirmasi visual
+    const contactForm = document.getElementById('contact-form');
+    const formFeedback = document.getElementById('form-feedback');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nama = document.getElementById('nama').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const topik = document.getElementById('topik').value;
+      const tanggal = document.getElementById('tanggal').value;
+      const pesan = document.getElementById('pesan').value.trim();
+
+      if (!nama || !email || !pesan) {
+        formFeedback.className = 'rounded-2xl p-4 text-sm font-medium bg-terakota-100 text-terakota-600 border border-terakota-500/30';
+        formFeedback.textContent = 'Mohon lengkapi kolom Nama Lengkap, Email, dan Pesan terlebih dahulu.';
+        formFeedback.classList.remove('hidden');
+        return;
+      }
+
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!emailValid) {
+        formFeedback.className = 'rounded-2xl p-4 text-sm font-medium bg-terakota-100 text-terakota-600 border border-terakota-500/30';
+        formFeedback.textContent = 'Format alamat email belum sesuai. Silakan periksa kembali.';
+        formFeedback.classList.remove('hidden');
+        return;
+      }
+
+      const infoTanggal = tanggal ? ` untuk rencana tanggal ${tanggal}` : '';
+      formFeedback.className = 'rounded-2xl p-4 text-sm font-medium bg-hutan-100 text-hutan-900 border border-hutan-600/30';
+      formFeedback.innerHTML = `
+        <p class="font-bold">Terima kasih, ${nama}!</p>
+        <p class="mt-1">Pesan Anda mengenai <strong>${topik}</strong>${infoTanggal} telah tercatat untuk tim pengelola Desa Sukamaju. Kami akan membalas melalui email <strong>${email}</strong> dalam 1×24 jam kerja.</p>
+      `;
+      formFeedback.classList.remove('hidden');
+      contactForm.reset();
+    });
+
+    // Animasi muncul bertahap saat menggulir halaman
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    revealElements.forEach((el) => observer.observe(el));
+
+    // Perbarui tahun pada footer secara otomatis
+    const tahunEl = document.getElementById('tahun-sekarang');
+    if (tahunEl) {
+      tahunEl.textContent = String(new Date().getFullYear());
+    }
+
+    // Inisialisasi konten dinamis
+    renderWisata('semua');
+    renderProduk();
+    renderGaleri();
+  </script>
+</body>
+</html>
